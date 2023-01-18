@@ -5,17 +5,34 @@ import java.util.List;
 import model.*;
 import view.*;
 
-
 public class Kata4 {
 
+    private static String fileName;
+    private static List<Mail> mailList;
+    private static Histogram<String> histogram;
+    private static HistogramDisplay histogramdisplay;
+
     public static void main(String[] args) {
-        
-        String fileName = new String("email.txt");
-        List<Mail> mailList = MailListReader.read(fileName);
-        Histogram<String> histogram = MailHistogramBuilder.build(mailList);
-        HistogramDisplay histogramdisplay = new HistogramDisplay(histogram,"Histograma");
-        histogramdisplay.execute();
+        fileName = "email.txt";
+        execute();
     }
 
-}
+    private static void execute() {
+        input();
+        process();
+        output();
+    }
 
+    private static void input() {
+         mailList = MailListReader.read(fileName);
+    }
+
+    private static void process() {
+         histogram = MailHistogramBuilder.build(mailList);
+    }
+
+    private static void output() {
+        histogramdisplay = new HistogramDisplay(histogram, "Histograma");
+        histogramdisplay.execute();
+    }
+}
